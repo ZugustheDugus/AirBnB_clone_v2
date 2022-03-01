@@ -20,6 +20,6 @@ class User(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """
-        inherit from base  and Basemodel init
+        Inherit from base and base_model init
         """
         super().__init__(*args, **kwargs)
