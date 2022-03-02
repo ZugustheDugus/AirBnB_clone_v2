@@ -113,11 +113,11 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def _create_dict_instance(self, line):
-        """
+    """def _create_dict_instance(self, line):
+
             Parse input and convert it to
             Dict for do_create
-        """
+
         new_dict = {}
         for item in line:
             if "=" in item:
@@ -137,24 +137,25 @@ class HBNBCommand(cmd.Cmd):
                         except Exception:
                             continue
                 new_dict[key] = value
-        return new_dict
+        return new_dict"""
 
     def do_create(self, args):
         """ Create an object of any class"""
-        args = args.split()
-        if not args[0]:
+        total = line.split(" ")
+        if len(total) < 1:
             print("** class name missing **")
             return
-        elif args[0] not in HBNBCommand.classes:
+        if total[0] in HBNBCommand.classes:
+            my_list = line.split(" ")
+            obj = eval(my_list[0])()
+            for key_values in my_list[1:]:
+                i, j = key_values.split("=")
+                j = j.replace('_', " ")
+                setattr(obj, i, eval(j))
+            obj.save()
+            print("{}".format(obj.id))
+        else:
             print("** class doesn't exist **")
-            return
-        # create a new dict from args
-        new_dict = self._create_dict_instance(args[1:])
-        # sends args on form of kwargs
-        new_instance = HBNBCommand.classes[args[0]](**new_dict)
-        storage.save()
-        print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
