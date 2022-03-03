@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from tokenize import String
+from AirBnB_clone_v2.models.base_model import Base
 from models.base_model import BaseModel
 import models
 import sqlalchemy
@@ -13,7 +14,13 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-class Place(BaseModel):
+place_amenity = Table("place_amenity", Base.metadata, Column
+                        ("place_id", String(60), ForeignKey
+                        ("places.id"), primary_key=True,
+                        nullable=False), Column("amenity_id",
+                        String(60), ForeignKey("amenities.id"),
+                        primary_key=True, nullable=False))
+class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
@@ -27,3 +34,8 @@ class Place(BaseModel):
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     amenity_ids = []
+
+    __tablename__ = "place_amenity"
+    place_amenities = relationship('Place', secondary=place_amenity)
+    metadata = Base.metadata
+
