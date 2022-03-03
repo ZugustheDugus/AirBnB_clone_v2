@@ -1,25 +1,12 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
-from tokenize import String
-from AirBnB_clone_v2.models.base_model import Base
-from models.base_model import BaseModel
-import models
-import sqlalchemy
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy import Table
-from os import getenv
-from models.amenity import Amenity
+from models.base_model import BaseModel, Base
 from models.review import Review
+from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy.orm import relationship
+from os import getenv
+import models
 
-
-place_amenity = Table("place_amenity", Base.metadata, Column
-                        ("place_id", String(60), ForeignKey
-                        ("places.id"), primary_key=True,
-                        nullable=False), Column("amenity_id",
-                        String(60), ForeignKey("amenities.id"),
-                        primary_key=True, nullable=False))
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
@@ -31,11 +18,19 @@ class Place(BaseModel, Base):
     number_bathrooms = Column(Integer, nullable=False, default=0)
     max_guest = Column(Integer, nullable=False, default=0)
     price_by_night = Column(Integer, nullable=False, default=0)
-    latitude = Column(Float, nullable=False)
-    longitude = Column(Float, nullable=False)
+    latitude = Column(Float, default=0, nullable=True)
+    longitude = Column(Float, default=0, nullable=True)
     amenity_ids = []
 
-    """__tablename__ = "place_amenity" """
-    place_amenities = relationship('Place', secondary=place_amenity)
-    metadata = Base.metadata
-
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        reviews = relationship('Review', backref='place',
+                                cascade='all, delete-orphan')
+    else:
+        @property
+        def reviews(self):
+            """Attribute for FileStorage"""
+            review_list = []
+            for el in models.storage.all(Review).values():
+                if el.place_id == self.id:
+                    review_list.append(el)
+            return review_list
