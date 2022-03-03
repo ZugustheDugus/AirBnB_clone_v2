@@ -13,7 +13,8 @@ from sqlalchemy import create_engine
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-all_classes = {"User", "City", "State", "Place", "Review", "Amenity"}
+all_classes = {"User": User, "City": City, "State": State, 
+"Place": Place, "Review": Review, "Amenity": Amenity}
 
 
 
