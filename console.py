@@ -113,54 +113,15 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    """def _create_dict_instance(self, line):
-
-            Parse input and convert it to
-            Dict for do_create
-
-        new_dict = {}
-        for item in line:
-            if "=" in item:
-                # creating list from value and key
-                # if "=" found
-                new_arg = item.split("=", 1)
-                key = new_arg[0]
-                value = new_arg[1]
-                if value[0] == '"' == value[-1]:
-                    value = value.replace('"', "").replace("_", " ")
-                else:
-                    try:
-                        value = int(value)
-                    except Exception:
-                        try:
-                            value = float(value)
-                        except Exception:
-                            continue
-                new_dict[key] = value
-        return new_dict"""
-
     def do_create(self, args):
         """ Create an object of any class"""
-        total = args.split()
-        if len(total) < 1:
+        split_args = args.split()
+        if not args:
             print("** class name missing **")
             return
-        elif total[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **"
-            return
-       """ if total[0] in HBNBCommand.classes:
-            my_list = args.split()
-            obj = eval(my_list[0])()
-            for key_values in my_list[1:]:
-                i, j = key_values.split("=")
-                j = j.replace('_', " ")
-                setattr(obj, i, eval(j))
-            obj.save()
-            print("{}".format(obj.id))
-        else:
+        elif split_args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
-            return"""
-
+            return
         new_instance = HBNBCommand.classes[split_args[0]]()
         #  if split_args[1] is not None:
         for i in range(1, len(split_args)):
