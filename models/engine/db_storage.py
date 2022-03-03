@@ -12,9 +12,13 @@ from models.amenity import Amenity
 from sqlalchemy import create_engine
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy import delete
 
-all_classes = {"User": User, "City": City, "State": State, 
-"Place": Place, "Review": Review, "Amenity": Amenity}
+all_classes = {
+                'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                'State': State, 'City': City, 'Amenity': Amenity,
+                'Review': Review
+                }
 
 
 
