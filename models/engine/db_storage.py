@@ -24,6 +24,8 @@ class DBStorage:
     """
     __engine = None
     __session = None
+
+
     def __init__(self):
         """
         starting up a connection to MySQL a table
@@ -62,7 +64,7 @@ class DBStorage:
         """
         self.__session.commit()
 
-    def delte(self, obj=None):
+    def delete(self, obj=None):
         """
         delete from the current database session obj if not None
         """
