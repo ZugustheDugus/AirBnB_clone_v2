@@ -18,7 +18,14 @@ class Amenity(BaseModel, Base):
     Place_amenities(relationship): Place = Amenitity relationship
     """
     if getenv('HBNB_TYPE_STORAGE') == 'db':
+        __tablename__ = "amenities"
         name = Column(String(128), nullable=False)
         place_amenities = relationship('Place', secondary=place_amenity)
     else:
         name = ""
+
+    """def __init__(self, *args, **kwargs):
+        "
+        Init for inherited
+        "
+        super().__init__(*args, **kwargs)"""

@@ -2,8 +2,13 @@
 """This module defines a class to manage file storage for hbnb clone"""
 import json
 
+<<<<<<< HEAD
 from sqlalchemy import delete
 
+=======
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+            "Place": Place, "Review": Review, "State": State, "User": User}
+>>>>>>> 6dc681f407fd3252e25eedb4dbdacb80f291ea39
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -13,6 +18,7 @@ class FileStorage:
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         if cls != None:
+<<<<<<< HEAD
             class_objects = {}
             for item in FileStorage.__objects:
                 if type(self.__objects[item]) == cls:
@@ -20,6 +26,10 @@ class FileStorage:
             return class_objects
         else:
             return FileStorage.__objects
+=======
+            return {key: self.__objects[key] for key in self.__objects if self.__objects[key].__class__ == cls}
+        return FileStorage.__objects
+>>>>>>> 6dc681f407fd3252e25eedb4dbdacb80f291ea39
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
