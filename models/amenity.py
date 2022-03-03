@@ -24,8 +24,8 @@ class Amenity(BaseModel, Base):
     else:
         name = ""
 
-    def __init__(self, *args, **kwargs):
-        """
+    """def __init__(self, *args, **kwargs):
+        "
         Init for inherited
-        """
-        super().__init__(*args, **kwargs)
+        "
+        super().__init__(*args, **kwargs)"""
