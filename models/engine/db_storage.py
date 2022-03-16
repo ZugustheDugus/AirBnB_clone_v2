@@ -12,8 +12,13 @@ from models.amenity import Amenity
 from sqlalchemy import create_engine
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy import delete
 
-all_classes = {"User", "City", "State", "Place", "Review", "Amenity"}
+all_classes = {
+                'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                'State': State, 'City': City, 'Amenity': Amenity,
+                'Review': Review
+                }
 
 
 
@@ -24,6 +29,8 @@ class DBStorage:
     """
     __engine = None
     __session = None
+
+
     def __init__(self):
         """
         starting up a connection to MySQL a table
@@ -62,7 +69,7 @@ class DBStorage:
         """
         self.__session.commit()
 
-    def delte(self, obj=None):
+    def delete(self, obj=None):
         """
         delete from the current database session obj if not None
         """

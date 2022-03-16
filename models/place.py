@@ -10,10 +10,10 @@ from models.amenity import Amenity
 
 
 Table('place_amenity', Base.metadata,
-      Column('place_id', String(60), ForeignKey('places.id'),
-             nullable=False, primary_key=True),
-      Column('amenity_id', String(60), ForeignKey('amenities.id'),
-             nullable=False, primary_key=True))
+        Column('place_id', String(60), ForeignKey('places.id'),
+            nullable=False, primary_key=True),
+        Column('amenity_id', String(60), ForeignKey('amenities.id'),
+            nullable=False, primary_key=True))
 
 
 class Place(BaseModel, Base):
@@ -32,10 +32,10 @@ class Place(BaseModel, Base):
     amenity_ids = []
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
-        reviews = relationship('Review', cascade="all, delete, delete-orphan",
-                               backref='place')
-        amenities = relationship('Amenity', secondary="place_amenity",
-                                 viewonly=False, backref="place_amenities")
+        reviews = relationship(Review, cascade="all, delete, delete-orphan",
+                                backref='places', viewonly=False)
+        amenities = relationship(Amenity, secondary="place_amenity",
+                                viewonly=False, backref="place_amenities")
     else:
         @property
         def reviews(self):
