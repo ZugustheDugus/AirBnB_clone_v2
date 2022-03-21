@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <HTML lang="en">
-    <TITLE>HBNB</TITLE>
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
     <BODY>
         <H1>States</H1>
-        <UL>
-            {% for item in states|dictsort %}
-            <li>{{ item.id }}: <B>{{ item.name }}</B></li>
+        <UL id="States">
+            {% for state in states.values() | sort(attribute="name") %}
+            <LI>State: {{ state.id }}: <B>{{ state.name }}</B></LI>
             {% endfor %}
         </UL>
     </BODY>
