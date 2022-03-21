@@ -45,7 +45,6 @@ class FileStorage:
     def reload(self):
         """Loads storage dictionary from file"""
 
-
         try:
             temp = {}
             with open(FileStorage.__file_path, 'r') as f:

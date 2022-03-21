@@ -9,8 +9,6 @@ web app must be listening on 0.0.0.0:5000
     has default value of "is cool"
 strict_slashes=False in route
 """
-
-
 from flask import Flask, render_template
 from models import storage
 from models.state import State
