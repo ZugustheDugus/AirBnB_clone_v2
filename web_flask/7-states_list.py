@@ -1,20 +1,33 @@
-"""States_List"""
-from flask import Flask
-from flask import render_template
+#!/usr/bin/python3
+"""Script to start a Flask web application
+web app must be listening on 0.0.0.0:5000
+/: will display "Hello HBNB!"
+/hbnb: will display "HBHB"
+/c: will display “C ” followed by the value of the text variable
+/python: will display " Python " followed by the value of text variable --
+     has default value of "is cool"
+strict_slashes=False in route
+"""
+
+
+from flask import Flask, render_template
 from models import storage
 from models.state import State
-
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
-states = storage.all(State)
 
-@app.route("/states_list")
+@app.route("/states_list", strict_slashes=False)
 def states_list():
+    """displays 'Hello HBNB!'"""
+    states = storage.all(State)
     return render_template('7-states_list.html', states=states)
 
+
 @app.teardown_appcontext
-def teardown():
+def teardown(cont):
+    """remove the current sql alchemy session"""
     storage.close()
 
-app.run(host="0.0.0.0")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="5000")
