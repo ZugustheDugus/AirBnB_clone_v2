@@ -5,14 +5,15 @@
     </HEAD>
     <BODY>
         <H1>States</H1>
-        <UL>
-            {% for state in states|dictsort %}
-            <li>{{ state.id }}: <B>{{ state.name }}</B></li>
-                <UL>
-                    {% for city in states.cities|dictsort %}
-                        <li>{{ city.id }}: <B>{{ city.name }}</B></li>
+        <UL id="States">
+            {% for state in states.values() | sort(attribute="name") %}
+            <LI>State: {{ state.id }}: <B>{{ state.name }}</B>
+                <UL id="cities">
+                    {% for city in state.cities | sort(attribute="name") %}
+                    <LI>City: {{ city.id }}: <B>{{ city.name }}</B></LI>
                     {% endfor %}
                 </UL>
+            </LI>
             {% endfor %}
         </UL>
     </BODY>
