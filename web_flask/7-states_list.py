@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-"""Script to start a Flask web application
+"""
+Script to start a Flask web application
 web app must be listening on 0.0.0.0:5000
 /: will display "Hello HBNB!"
 /hbnb: will display "HBHB"
 /c: will display “C ” followed by the value of the text variable
 /python: will display " Python " followed by the value of text variable --
-     has default value of "is cool"
+    has default value of "is cool"
 strict_slashes=False in route
 """
 

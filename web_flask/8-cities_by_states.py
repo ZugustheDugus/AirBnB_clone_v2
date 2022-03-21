@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Script to starts a Flask web application
+"""
+Script to start a Flask web application
 web app must be listening on 0.0.0.0:5000
 /: will display "Hello HBNB!"
 /hbnb: will display "HBHB"
