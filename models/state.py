@@ -9,24 +9,19 @@ import models
 
 
 class State(BaseModel, Base):
-    """ State class
-    name: input name
-    """
-    __tablename__ = "states"
+    """ State class """
+    __tablename__ = 'states'
     name = Column(String(128), nullable=False)
 
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        cities = relationship(City, backref="state", 
-                                cascade="all, delete-orphan")
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        cities = relationship('City', backref='state',
+                                cascade='all, delete, delete-orphan')
     else:
         @property
         def cities(self):
-            """
-            returns list of City instances with state_id
-            equal to the current State.id
-            """
-            city_l = []
-            for city in models.storage.all(City).items():
-                if city.state_id == self.id:
-                    city_l.append(city)
-            return city_l
+            """Attribute for FileStorage"""
+            city_list = []
+            for el in models.storage.all(City).values():
+                if el.state_id == self.id:
+                    city_list.append(el)
+            return city_list
